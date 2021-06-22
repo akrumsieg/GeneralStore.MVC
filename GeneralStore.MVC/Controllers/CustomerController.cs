@@ -18,5 +18,24 @@ namespace GeneralStore.MVC.Controllers
             List<Customer> orderedList = customerList.OrderBy(c => c.LastName).ToList();
             return View(orderedList);
         }
+
+        // GET: Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Create
+        [HttpPost]
+        public ActionResult Create(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Customers.Add(customer);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(customer);
+        }
     }
 }
