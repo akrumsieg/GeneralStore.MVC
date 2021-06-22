@@ -34,6 +34,7 @@ namespace GeneralStore.MVC.Models
         [Display(Name = "Time of Most Recent Modification")]
         public DateTime? ModifiedTimeStamp { get; set; }
 
+        [Display(Name = "Total Price")]
         public decimal TotalPrice()
         {
             return PurchaseQuantity * Product.Price;
