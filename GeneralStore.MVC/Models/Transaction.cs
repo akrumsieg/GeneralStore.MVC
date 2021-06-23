@@ -28,6 +28,7 @@ namespace GeneralStore.MVC.Models
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Time of Transaction")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime TimeStamp { get; set; }
 
         [DataType(DataType.DateTime)]

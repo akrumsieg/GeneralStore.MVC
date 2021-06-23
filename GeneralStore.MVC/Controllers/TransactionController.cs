@@ -10,7 +10,7 @@ namespace GeneralStore.MVC.Controllers
 {
     public class TransactionController : Controller
     {
-        private ApplicationDbContext _db = new ApplicationDbContext(); 
+        private ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: Transaction
         public ActionResult Index()
@@ -23,8 +23,8 @@ namespace GeneralStore.MVC.Controllers
         // GET: Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(_db.Customers, "CustomerId", "FullName");
-            ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "Name");
+            ViewBag.CustomerId = new SelectList(_db.Customers.ToList(), "CustomerId", "FullName");
+            ViewBag.ProductId = new SelectList(_db.Products.ToList(), "ProductId", "Name");
             return View();
         }
 
@@ -37,8 +37,8 @@ namespace GeneralStore.MVC.Controllers
                 //if (transaction.Product == null) return View(transaction);
                 //if (transaction.Customer == null) return View(transaction);
                 //if (transaction.PurchaseQuantity > transaction.Product.InventoryCount) return View(transaction);
-                transaction.Product.InventoryCount -= transaction.PurchaseQuantity;
                 transaction.TimeStamp = DateTime.Now;
+                //transaction.Product.InventoryCount -= transaction.PurchaseQuantity;
                 _db.Transactions.Add(transaction);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
